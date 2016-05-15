@@ -16,4 +16,4 @@ To run, type the following into terminal
 It will run `SpaceInvaders-v0` by default but you can use other game names as well.
 
 ## Credits
-Credit for the vast majority of code here goes to Yoav Zimmerman. I've merely created a wrapper around all of the important functions to get people started.
+Credit for the vast majority of code here goes to [Kee Hyun Won](https://github.com/kihyunwon). I've merely created a wrapper to get people started.
