@@ -5,8 +5,8 @@ from environment import Environment
 from train import Trainer
 from dqn import DQN
 
+## these are just command line arguments. The 10 line code is at the bottom -- Siraj
 parser = argparse.ArgumentParser()
-
 envarg = parser.add_argument_group('Environment')
 envarg.add_argument("--game", type=str, default="SpaceInvaders-v0", help="Name of the atari game to test")
 envarg.add_argument("--width", type=int, default=84, help="Screen width")
@@ -42,14 +42,13 @@ testarg.add_argument("--ckpt_dir", default='model', help="Tensorflow checkpoint 
 testarg.add_argument("--out", help="Output directory for gym.")
 testarg.add_argument("--episodes", type=int, default=100, help="Number of episodes.")
 testarg.add_argument("--seed", type=int, help="Random seed.")
-
 args = parser.parse_args()
-
 if args.seed:
     rand.seed(args.seed)
-
 if not os.path.exists(args.ckpt_dir):
 	os.makedirs(args.ckpt_dir)
+
+##here we go...
 
 # initialize gym environment and dqn
 env = Environment(args)
