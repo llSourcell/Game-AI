@@ -101,7 +101,10 @@ class DQN:
         next_state = self.buffer.getState()
         terminal = self.env.isTerminal()
 
+        reward = np.clip(reward, -1.0, 1.0)
+
         self.memory.add(state, action, reward, next_state, terminal)
+        
         
         return state, action, reward, next_state, terminal
 
@@ -111,12 +114,10 @@ class DQN:
         actions = np.array([batch[i][1] for i in range(self.batch_size)]).astype(np.float32)
         rewards = np.array([batch[i][2] for i in range(self.batch_size)]).astype(np.float32)
         successes += np.sum(rewards==1)
-        failures += np.sum(rewards==-1)
         next_state = np.array([batch[i][3] for i in range(self.batch_size)]).astype(np.float32)
         terminals = np.array([batch[i][4] for i in range(self.batch_size)]).astype(np.float32)
 
-        rewards = np.clip(rewards, -1.0, 1.0)
-
+        failures += np.sum(terminals==1)
         q_target = self.target_net.y.eval( feed_dict={ self.target_net.x: next_state } )
         q_target_max = np.argmax(q_target, axis=1)
         q_target = rewards + ((1.0 - terminals) * (self.discount * q_target_max))
