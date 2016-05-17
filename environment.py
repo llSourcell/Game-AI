@@ -8,7 +8,7 @@ class Environment:
         self.observation = None
         self.display = params.display
         self.terminal = False
-        self.dims = (params.width, params.height)
+        self.dims = (params.height, params.width)
 
     def actions(self):
         return self.gym.action_space.n
