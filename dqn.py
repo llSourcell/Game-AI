@@ -135,7 +135,8 @@ class DQN:
         for i in xrange(self.episodes):
             terminal = False
             while not terminal:
-                action, reward, screen, terminal = self.observe(self.eps)
+                #aca cambie algo
+                state, action, reward, screen, terminal = self.observe(self.eps)
 
     def copy_weights(self, sess):
         for key in self.train_net.weights.keys():

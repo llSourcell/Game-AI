@@ -48,6 +48,15 @@ if args.seed:
 if not os.path.exists(args.ckpt_dir):
 	os.makedirs(args.ckpt_dir)
 
+#Checking for/Creating gym output directory
+if args.out:
+	if not os.path.exists(args.out):
+		os.makedirs(args.out)
+else:
+	if not os.path.exists('gym-out/' + args.game):
+		os.makedirs('gym-out/' + args.game)
+	args.out = 'gym-out/' + args.game
+
 ##here we go...
 
 # initialize gym environment and dqn
@@ -61,4 +70,3 @@ Trainer(agent).run()
 env.gym.monitor.start(args.out, force=True)
 agent.play()
 env.gym.monitor.close()
-
