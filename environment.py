@@ -22,7 +22,8 @@ class Environment:
             self.gym.render()
         self.observation, reward, self.terminal, info = self.gym.step(action)
         if self.terminal:
-            print "No more lives, restarting"
+            #if self.display:
+            #    print "No more lives, restarting"
             self.gym.reset()
         return reward
 
