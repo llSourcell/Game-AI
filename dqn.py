@@ -45,8 +45,8 @@ class DQN:
 
         self.actions = tf.placeholder(tf.float32, [None, self.num_actions])
         self.q_target = tf.placeholder(tf.float32, [None])
-        self.q_train = tf.reduce_max(tf.mul(self.train_net.y, self.actions), reduction_indices=1)
-        self.diff = tf.sub(self.q_target, self.q_train)
+        self.q_train = tf.reduce_max(tf.multiply(self.train_net.y, self.actions), reduction_indices=1)
+        self.diff = tf.subtract(self.q_target, self.q_train)
 
         half = tf.constant(0.5)
         if params.clip_delta > 0:
@@ -54,9 +54,9 @@ class DQN:
             clipped_diff = tf.clip_by_value(abs_diff, 0, 1)
             linear_part = abs_diff - clipped_diff
             quadratic_part = tf.square(clipped_diff)
-            self.diff_square = tf.mul(half, tf.add(quadratic_part, linear_part))
+            self.diff_square = tf.multiply(half, tf.add(quadratic_part, linear_part))
         else:
-            self.diff_square = tf.mul(half, tf.square(self.diff))
+            self.diff_square = tf.multiply(half, tf.square(self.diff))
 
         if params.accumulator == 'sum':
             self.loss = tf.reduce_sum(self.diff_square)
