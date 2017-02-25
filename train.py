@@ -11,7 +11,7 @@ class Trainer:
 
     def run(self):
         with tf.Session() as sess:
-            sess.run(tf.initialize_all_variables())
+            sess.run(tf.global_variables_initializer())
             self.agent.randomRestart()
 
             successes = 0
